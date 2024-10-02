@@ -16,7 +16,7 @@ const Home = () => {
   const [showToast, setShowToast] = useState(false);
 
   const images = [
-    { icon: <PiCarrotBold />, url: "/teambibimbap/vege", type: "vege" },
+    { icon: <PiCarrotBold />, url: "/vege", type: "vege" },
     { icon: <LuSalad />, url: "/teambibimbap/salad", type: "salad" },
     { icon: <LuGrape />, url: "/teambibimbap/fruit", type: "fruit" },
   ];
