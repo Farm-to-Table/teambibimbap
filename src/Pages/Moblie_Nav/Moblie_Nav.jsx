@@ -12,11 +12,11 @@ const buttons = [
   },
   {
     icon: <CiShoppingCart />,
-    link: "cart",
+    link: "/teambibimbap/cart",
   },
   {
     icon: <CiMap />,
-    link: "map",
+    link: "/teambibimbap/map",
   },
 ];
 
