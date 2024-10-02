@@ -8,7 +8,7 @@ const buttons = [
   },
   {
     icon: <CiHome />,
-    link: "/teambibimbap",
+    link: "/teambibimbap/",
   },
   {
     icon: <CiShoppingCart />,
