@@ -12,19 +12,19 @@ import Payment from "../Pages/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/teambibimbap/",
     element: <App />,
     errorElement: "not found",
     children: [
-      { path: "/teambibimbap/", element: <Home /> },
-      { path: "/teambibimbap/cart", element: <Cart /> },
-      { path: "/teambibimbap/farm/:id", element: <FarmDetailPage /> },
-      { path: "/teambibimbap/product/:farmName", element: <ProductPage /> },
-      { path: "/teambibimbap/map", element: <Map /> },
-      { path: "/teambibimbap/vege", element: <Vege /> },
-      { path: "/teambibimbap/salad", element: <Salad /> }, // 경로 수정
-      { path: "/teambibimbap/fruit", element: <Fruit /> }, // 경로 수정
-      { path: "/teambibimbap/payment", element: <Payment /> },
+      { path: "/teambibimbap/", element: <Home /> }, // 변경
+      { path: "cart", element: <Cart /> }, // 변경
+      { path: "farm/:id", element: <FarmDetailPage /> }, // 변경
+      { path: "product/:farmName", element: <ProductPage /> }, // 변경
+      { path: "map", element: <Map /> }, // 변경
+      { path: "vege", element: <Vege /> }, // 변경
+      { path: "salad", element: <Salad /> }, // 변경
+      { path: "fruit", element: <Fruit /> }, // 변경
+      { path: "payment", element: <Payment /> }, // 변경
     ],
   },
 ]);
