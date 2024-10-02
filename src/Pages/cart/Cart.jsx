@@ -184,9 +184,15 @@ const Cart = () => {
                 Total Price: ${totalPrice.toFixed(2)}
               </h3>
             </div>
-            <button className="btn btn-primary mt-4">
-              <Link to={`/teambibimbap/payment`}>Proceed to Payment</Link>
-            </button>
+            <Link
+              to={`/teambibimbap/payment`}
+              className="w-full 
+               flex justify-center items-center mt-4"
+            >
+              <button className="btn btn-primary w-full">
+                Proceed to Payment
+              </button>
+            </Link>
           </div>
         </div>
       ) : (
