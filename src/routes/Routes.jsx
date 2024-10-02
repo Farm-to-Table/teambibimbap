@@ -12,7 +12,7 @@ import Payment from "../Pages/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/teambibimbap/",
     element: <App />,
     errorElement: "not found",
     children: [
