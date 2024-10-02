@@ -100,14 +100,14 @@ const Home = () => {
             }
 
             return (
-              <a
-                href={image.url}
+              <Link
+                to={image.url}
                 key={index}
                 className="w-24 h-24 text-5xl mb-3 flex items-center justify-center object-cover rounded-full shadow-md shadow-black"
                 style={{ backgroundColor: bgColor, color: "#fff" }}
               >
                 {image.icon}
-              </a>
+              </Link>
             );
           })}
         </div>
