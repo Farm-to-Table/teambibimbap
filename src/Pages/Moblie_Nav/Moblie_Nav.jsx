@@ -2,21 +2,21 @@ import React from "react";
 import { CiShoppingCart, CiMap, CiHome, CiChat1, CiUser } from "react-icons/ci";
 
 const buttons = [
-  {
-    icon: <CiUser />,
-    link: "/teambibimbap/profile",
-  },
+  // {
+  //   icon: <CiUser />,
+  //   link: "/teambibimbap/profile",
+  // },
   {
     icon: <CiHome />,
     link: "/teambibimbap/",
   },
   {
     icon: <CiShoppingCart />,
-    link: "/teambibimbap/cart",
+    link: "cart",
   },
   {
     icon: <CiMap />,
-    link: "/teambibimbap/map",
+    link: "map",
   },
 ];
 
