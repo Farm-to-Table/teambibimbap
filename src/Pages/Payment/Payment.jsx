@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Payment.css";
+
 const Payment = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
