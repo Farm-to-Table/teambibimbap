@@ -3,7 +3,6 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import Navbar from "./Components/Nav/Navbar";
 import Moblie_Nav from "./Pages/Moblie_Nav/Moblie_Nav";
-import { RecoilRoot } from "recoil";
 
 function App() {
   return (
