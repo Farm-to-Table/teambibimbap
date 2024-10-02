@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
     element: <App />,
     errorElement: "not found",
     children: [
-      { path: "", element: <Home /> },
+      { path: "/teambibimbap/", element: <Home /> },
       { path: "cart", element: <Cart /> },
       { path: "farm/:id", element: <FarmDetailPage /> },
       { path: "product/:farmName", element: <ProductPage /> },

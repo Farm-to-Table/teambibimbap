@@ -16,9 +16,9 @@ const Home = () => {
   const [showToast, setShowToast] = useState(false);
 
   const images = [
-    { icon: <PiCarrotBold />, url: "/vege", type: "vege" },
-    { icon: <LuSalad />, url: "/salad", type: "salad" },
-    { icon: <LuGrape />, url: "/fruit", type: "fruit" },
+    { icon: <PiCarrotBold />, url: "/teambibimbap/vege", type: "vege" },
+    { icon: <LuSalad />, url: "/teambibimbap/salad", type: "salad" },
+    { icon: <LuGrape />, url: "/teambibimbap/fruit", type: "fruit" },
   ];
 
   useEffect(() => {
@@ -126,7 +126,7 @@ const Home = () => {
         {/* Corrected recommendation product list */}
         <div className="flex flex-row justify-center space-x-4 ">
           {RecommandData.map((product, index) => (
-            <Link to={`/product/${product.farm}`} key={index}>
+            <Link to={`/teambibimbap/product/${product.farm}`} key={index}>
               <div className="bg-base-300 w-24 h-24 rounded-full flex items-center justify-center">
                 <img
                   src={product.image1}

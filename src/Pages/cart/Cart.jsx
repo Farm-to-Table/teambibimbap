@@ -185,7 +185,7 @@ const Cart = () => {
               </h3>
             </div>
             <button className="btn btn-primary mt-4">
-              <Link to={`/payment`}>Proceed to Payment</Link>
+              <Link to={`/teambibimbap/payment`}>Proceed to Payment</Link>
             </button>
           </div>
         </div>

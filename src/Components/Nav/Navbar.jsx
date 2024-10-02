@@ -27,9 +27,9 @@ const Navbar = () => {
     setShowDropdown(value.length > 0); // Show dropdown if there's input
   };
 
-  const handleFarmClick = (farmName) => {
+  const handleFarmClick = (id) => {
     // Navigate to the farm detail page
-    navigate(`/farm?name=${encodeURIComponent(farmName)}`);
+    navigate(`/teambibimbap/farm/${id}`);
     setSearch(""); // Clear search input
     setFilteredResults([]); // Clear filtered results
     setShowDropdown(false); // Hide dropdown
@@ -37,7 +37,7 @@ const Navbar = () => {
 
   return (
     <div className="border-b-base-300 p-3 flex flex-row sm:flex-row items-center justify-between align-middle">
-      <Link to="/">
+      <Link to="/teambibimbap">
         <div className="flex items-center mb-4 md:mb-0">
           <img src={logo} alt="logo" width="100rem" className="mr-4" />
         </div>
@@ -77,14 +77,12 @@ const Navbar = () => {
                 );
 
                 return (
-                  <li
-                    key={index}
-                    className="hover:bg-base-300 p-2 transition-colors duration-200"
-                  >
+                  <li key={index}>
+                    {/* Display the farm name if it matches the search */}
                     {farmMatches && (
                       <div
-                        className="flex items-center cursor-pointer"
-                        onClick={() => handleFarmClick(farm.name)}
+                        className="flex items-center cursor-pointer hover:bg-base-300 p-2 transition-colors duration-200"
+                        onClick={() => handleFarmClick(farm.id)}
                       >
                         <img
                           src={farm.image}
@@ -95,25 +93,29 @@ const Navbar = () => {
                       </div>
                     )}
 
+                    {/* Display products if farm doesn't match but products do */}
                     {productMatches.length > 0 && !farmMatches && (
-                      <div
-                        className="flex items-center cursor-pointer"
-                        onClick={() => handleFarmClick(farm.name)}
-                      >
-                        <img
-                          src={farm.image}
-                          alt={farm.name}
-                          className="w-12 h-12 mr-2 rounded"
-                        />
-                        <span className="font-bold">{farm.name}</span>
+                      <div>
+                        <div
+                          className="flex items-center cursor-pointer hover:bg-base-300 p-2 transition-colors duration-200"
+                          onClick={() => handleFarmClick(farm.id)}
+                        >
+                          <img
+                            src={farm.main_image}
+                            alt={farm.name}
+                            className="w-12 h-12 mr-2 rounded"
+                          />
+                          <span className="font-bold">{farm.name}</span>
+                        </div>
                         <ul className="pl-4 flex flex-col">
                           {productMatches.map((product, productIndex) => (
                             <li
                               key={productIndex}
                               className="flex items-center"
                             >
-                              <span className="ml-2">{product.product}</span>
-                              <span className="ml-2">{product.price}$</span>
+                              <span className="ml-2">{product.name}</span>
+
+                              {/* Ensure sizes are handled correctly */}
                             </li>
                           ))}
                         </ul>

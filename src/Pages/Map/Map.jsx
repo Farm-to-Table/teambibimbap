@@ -68,7 +68,7 @@ const Map = () => {
   };
 
   const handleFarmClick = (farm) => {
-    navigate(`/farm/${farm.id}`);
+    navigate(`/teambibimbap/farm/${farm.id}`);
   };
 
   const handleSchoolChange = (event) => {

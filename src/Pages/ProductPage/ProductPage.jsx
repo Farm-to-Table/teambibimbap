@@ -123,11 +123,11 @@ const ProductPage = () => {
       </div>
 
       <div className="fixed bottom-12 left-0 right-0 bg-gray-300 p-3 flex justify-between">
-        <button className="btn btn-square btn-info w-2/6">
-          <Link to={`/farm/${farm.id}`} key={farm.id}>
+        <Link to={`/teambibimbap/farm/${farm.id}`} key={farm.id}>
+          <button className="btn btn-square btn-info w-full p-3">
             Farm Info
-          </Link>
-        </button>
+          </button>
+        </Link>
       </div>
     </div>
   );

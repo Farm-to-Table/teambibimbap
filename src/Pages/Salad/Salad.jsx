@@ -72,7 +72,7 @@ const Salad = () => {
       {/* Product listing */}
       <div>
         {sortedFruit.map((product, index) => (
-          <Link to={`/product/${product.farm}`} key={index}>
+          <Link to={`/teambibimbap/product/${product.farm}`} key={index}>
             <div className="shadow-lg rounded-lg flex flex-row justify-center items-center relative m-3">
               <div className="absolute top-2 -left-2">
                 {product.onStock && (
