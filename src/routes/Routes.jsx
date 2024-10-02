@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
     errorElement: "not found",
     children: [
       { path: "/teambibimbap/", element: <Home /> }, // 변경
-      { path: "cart", element: <Cart /> }, // 변경
+      { path: "/teambibimbap/cart", element: <Cart /> }, // 변경
       { path: "farm/:id", element: <FarmDetailPage /> }, // 변경
       { path: "product/:farmName", element: <ProductPage /> }, // 변경
       { path: "map", element: <Map /> }, // 변경
