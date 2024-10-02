@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import logo from "../../assets/logo.png";
 import { CiBellOn } from "react-icons/ci";
 import farms from "../../assets/farmsData"; // Ensure the farms data is imported
@@ -37,9 +37,11 @@ const Navbar = () => {
 
   return (
     <div className="border-b-base-300 p-3 flex flex-row sm:flex-row items-center justify-between align-middle">
-      <div className="flex items-center mb-4 md:mb-0">
-        <img src={logo} alt="logo" width="100rem" className="mr-4" />
-      </div>
+      <Link to="/">
+        <div className="flex items-center mb-4 md:mb-0">
+          <img src={logo} alt="logo" width="100rem" className="mr-4" />
+        </div>
+      </Link>
       <div className="w-full md:w-1/2 mb-4 md:mb-0 relative">
         <label className="input flex items-center gap-2 w-full border-0 focus-within:outline-none focus-within:ring-0">
           <input

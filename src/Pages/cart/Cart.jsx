@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import schoolData, {
+  getSelectedSchool,
+  saveSelectedSchool,
+} from "../../assets/schoolData";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [selectedSchool, setSelectedSchool] = useState(null);
+  const [selectedSlot, setSelectedSlot] = useState(null); // 하나의 슬롯 선택 상태 추가
 
   useEffect(() => {
     // Retrieve cart items from localStorage when the component mounts
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(storedCart);
+
+    // Retrieve selected school and log it for debugging
+    const school = getSelectedSchool();
+    setSelectedSchool(school);
   }, []);
 
   useEffect(() => {
@@ -47,7 +58,10 @@ const Cart = () => {
     localStorage.setItem("cart", JSON.stringify(newCart));
   };
 
-  console.log("Current cart:", cart); // Log the current cart state
+  const handleSlotChange = (date) => {
+    // 하나의 슬롯만 선택할 수 있도록 설정
+    setSelectedSlot(date === selectedSlot ? null : date);
+  };
 
   return (
     <div className="p-4 h-full">
@@ -79,14 +93,14 @@ const Cart = () => {
                         boxShadow: "none",
                         border: "none",
                         outline: "none",
-                      }} // Remove the box shadow, border, and outline
+                      }}
                     >
                       {Object.keys(item.price).map((weight) => (
                         <option
                           key={weight}
                           value={weight}
                           className="border-none outline-none"
-                          style={{ border: "none", outline: "none" }} // Remove border and outline for option
+                          style={{ border: "none", outline: "none" }}
                         >
                           {weight}
                         </option>
@@ -125,12 +139,54 @@ const Cart = () => {
                 </div>
               </div>
             ))}
+            {/* 날짜별 슬롯과 체크박스 표시 */}
+            {selectedSchool && (
+              <div className="mt-4 text-center">
+                <h3 className="text-lg font-bold">Available Slots:</h3>
+                <table className="table-auto w-full mt-2">
+                  <thead>
+                    <tr>
+                      <th className="border border-gray-300 p-2">Date</th>
+                      <th className="border border-gray-300 p-2">
+                        Available Slots
+                      </th>
+                      <th className="border border-gray-300 p-2">Select</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(selectedSchool.slot).map(
+                      ([date, available]) => (
+                        <tr key={date}>
+                          <td className="border border-gray-300 p-2">{date}</td>
+                          <td className="border border-gray-300 p-2">
+                            {available}
+                          </td>
+                          <td className="border border-gray-300 p-2">
+                            <div className="form-control  justify-center flex flex-row">
+                              <input
+                                type="checkbox"
+                                checked={selectedSlot === date}
+                                onChange={() => handleSlotChange(date)}
+                                className="checkbox checkbox-info"
+                              />
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
             <div className="mt-4">
               <h3 className="font-bold text-lg text-end">
                 Total Price: ${totalPrice.toFixed(2)}
               </h3>
             </div>
-            <button className="btn btn-primary mt-4">Proceed to Payment</button>
+            <button className="btn btn-primary mt-4">
+              <Link to={`/payment`}>Proceed to Payment</Link>
+            </button>
           </div>
         </div>
       ) : (

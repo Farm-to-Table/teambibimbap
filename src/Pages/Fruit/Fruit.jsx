@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import fruit from "../../assets/product/fruit/fruit";
+import product from "../../assets/product/product";
 
 const Fruit = () => {
   // State for managing the organic and wonkey filters and sorting option
@@ -10,11 +10,13 @@ const Fruit = () => {
   const [isScoreHighToLow, setIsScoreHighToLow] = useState(true); // State to toggle score sorting
 
   // Handle filtering for organic and wonkey products
-  const filteredFruit = fruit.filter((product) => {
+  const filteredFruit = product.filter((product) => {
     // Filter by organic and wonkey conditions
     const organicCondition = isOrganicOnly ? product.organic : true;
     const wonkeyCondition = isWonkeyOnly ? product.wonkey : true;
-    return organicCondition && wonkeyCondition;
+    const categoryCondition = product.category === "fruit"; // Add category filter
+
+    return organicCondition && wonkeyCondition && categoryCondition; // Return the combined condition
   });
 
   // Handle sorting by name or score
@@ -69,8 +71,8 @@ const Fruit = () => {
 
       {/* Product listing */}
       <div>
-        {sortedFruit.map((product) => (
-          <Link to={`/product/${product.id}`} key={product.id}>
+        {sortedFruit.map((product, index) => (
+          <Link to={`/product/${product.farm}`} key={index}>
             <div className="shadow-lg rounded-lg flex flex-row justify-center items-center relative m-3">
               <div className="absolute top-2 -left-2">
                 {product.onStock && (

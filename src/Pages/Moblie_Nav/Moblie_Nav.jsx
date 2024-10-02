@@ -3,24 +3,20 @@ import { CiShoppingCart, CiMap, CiHome, CiChat1, CiUser } from "react-icons/ci";
 
 const buttons = [
   {
-    icon: <CiShoppingCart />,
-    link: "/cart",
-  },
-  {
-    icon: <CiMap />,
-    link: "/map",
+    icon: <CiUser />,
+    link: "/profile",
   },
   {
     icon: <CiHome />,
     link: "/",
   },
   {
-    icon: <CiChat1 />,
-    link: "/chat",
+    icon: <CiShoppingCart />,
+    link: "/cart",
   },
   {
-    icon: <CiUser />,
-    link: "/profile",
+    icon: <CiMap />,
+    link: "/map",
   },
 ];
 

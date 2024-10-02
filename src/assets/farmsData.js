@@ -20,6 +20,24 @@ import WestGate_main from "../assets/farmImage/Westgate Green Farms-main.png";
 import WestGate_profile from "../assets/farmImage/Windmill Orchards Ltd-profile.png";
 import Strawberry1 from "../assets/product/fruit/1.Phil Greig Strawberry Gardens-strawberry1.png";
 import Strawberry2 from "../assets/product/fruit/1.Phil Greig Strawberry Gardens-strawberry2.png";
+import lettuce1 from "../assets/product/salad/5.Riverhead Fresh Farms-lettuce1.png";
+import lettuce2 from "../assets/product/salad/5.Riverhead Fresh Farms-lettuce2.png";
+import lettuce3 from "../assets/product/salad/5.Riverhead Fresh Farms-lettuce3.png";
+import carrot1 from "../assets/product/vege/5.Riverhead Fresh Farms-carrot1.png";
+import carrot2 from "../assets/product/vege/5.Riverhead Fresh Farms-carrot2.png";
+import potato1 from "../assets/product/vege/2.Te Puea Orchard-potato1.png";
+import potato2 from "../assets/product/vege/2.Te Puea Orchard-potato2.png";
+import apple1 from "../assets/product/fruit/3.Windmill Orchards Ltd-apple1.png";
+import apple2 from "../assets/product/fruit/3.Windmill Orchards Ltd-apple2.png";
+import onion1 from "../assets/product/vege/4.Westgate Green Farms-onion1.png";
+import onion2 from "../assets/product/vege/4.Westgate Green Farms-onion2.png";
+import carrot1_1 from "../assets/product/vege/7.Golden Roots Ltd-carrot1.png";
+import carrot2_1 from "../assets/product/vege/6.Orange Grove Farm Ltd-carrot1.png";
+import carrot3_1 from "../assets/product/vege/8.Pure Soil Farms Ltd-carrot1.png";
+import carrot4_1 from "../assets/product/vege/9.Green Thumb Gardens-carrot1.png";
+import sweetPotato1 from "../assets/product/vege/9.Green Thumb Gardens-sweet potato1.png";
+import sweetPotato1_2 from "../assets/product/vege/9.Green Thumb Gardens-sweet potato2.png";
+import carrot5_1 from "../assets/product/vege/10.Sunshine Acres-carrot1.png";
 const farms = [
   {
     id: 1,
@@ -65,15 +83,14 @@ const farms = [
     score: 5,
     products: [
       {
-        product_image1: "",
-        product_image2: "",
+        product_image1: potato1,
+        product_image2: potato2,
         product: "Potato",
         varieties: {
           King_Edward:
             "Soft and creamy in texture, perfect for mashing or roasting.",
           Rua: "Firm and moist, ideal for frying or steaming.",
         },
-        size: "",
         weight: [500, 1000, 2000],
         quality:
           "All potatoes are freshly harvested and delivered the same day. We minimize the use of chemical fertilizers and pesticides, offering naturally healthy potatoes.",
@@ -97,15 +114,14 @@ const farms = [
     score: 5,
     products: [
       {
-        product_image1: "",
-        product_image2: "",
+        product_image1: apple1,
+        product_image2: apple2,
         product: "Apple",
         varieties: {
           Royal_Gala: "Juicy and sweet, perfect as a snack for children.",
           Braeburn:
             "Known for its tangy flavor, ideal for salads or as a cooking ingredient.",
         },
-        size: "",
         weight: [750, 1500, 3000],
         quality:
           "We minimize the use of pesticides and chemical fertilizers in our apple production. Our farm is powered by wind energy, reducing our environmental impact. Through these sustainable practices, we offer apples that consumers can trust, from our farm to their table.",
@@ -130,14 +146,13 @@ const farms = [
     score: 4.7,
     products: [
       {
-        product_image1: "",
-        product_image2: "",
+        product_image1: onion1,
+        product_image2: onion2,
         product: "Onion",
         varieties: {
           Brown_Onions:
             "A staple ingredient for cooking, offering a sweet and rich flavor.",
         },
-        size: "",
         weight: [1000, 2000, 5000],
         quality:
           "We use the latest farming technologies and strict quality control measures to ensure safety and reliability in our onions.",
@@ -162,11 +177,12 @@ const farms = [
     score: 4.5,
     products: [
       {
-        product_image1: "",
-        product_image2: "",
+        product_image1: lettuce1,
+        product_image2: lettuce2,
         product: "Lettuce",
-        varieties: {},
-        size: "",
+        varieties: {
+          Lettuce: "Crisp and fresh, perfect for salads and various dishes.",
+        },
         weight: [500, 1000, 2000],
         quality:
           "We minimize the use of pesticides and chemical fertilizers to grow healthy vegetables in their natural state.",
@@ -178,11 +194,13 @@ const farms = [
         contact: "+64 9 412 8933",
       },
       {
-        product_image1: "",
-        product_image2: "",
+        product_image1: carrot1,
+        product_image2: carrot2,
         product: "Carrot",
-        varieties: {},
-        size: "",
+        varieties: {
+          Carrots:
+            "Sweet and rich in nutrients, great as a snack and pairs well with many recipes.",
+        },
         weight: [500, 1000, 2000],
         quality:
           "We minimize the use of pesticides and chemical fertilizers to grow healthy vegetables in their natural state.",
@@ -207,7 +225,7 @@ const farms = [
     score: 4.6,
     products: [
       {
-        product_image1: "",
+        product_image1: carrot2_1,
         product_image2: "",
         product: "Carrot",
         varieties: {
@@ -215,7 +233,6 @@ const farms = [
             "Known for its sweet, tender taste, perfect for salads or snacking.",
           Chantenay: "A stubby, flavorful carrot, ideal for roasting.",
         },
-        size: "",
         weight: [500, 1000, 2000],
         quality:
           "We use sustainable farming practices to grow high-quality organic carrots.",
@@ -240,14 +257,13 @@ const farms = [
     score: 5,
     products: [
       {
-        product_image1: "",
+        product_image1: carrot1_1,
         product_image2: "",
         product: "Carrot",
         varieties: {
           Nantes: "A crisp, juicy variety, perfect for juicing or snacking.",
           Atomic_Red: "A vibrant red carrot, loaded with antioxidants.",
         },
-        size: "",
         weight: [500, 1000, 2000],
         quality:
           "We use wind energy and sustainable farming practices to grow high-quality organic carrots.",
@@ -260,6 +276,7 @@ const farms = [
       },
     ],
   },
+
   {
     id: 8,
     name: "Pure Soil Farms Ltd",
@@ -272,14 +289,13 @@ const farms = [
     score: 4,
     products: [
       {
-        product_image1: "",
+        product_image1: carrot3_1,
         product_image2: "",
         product: "Carrot",
         varieties: {
           Danvers: "A versatile, classic carrot, perfect for soups and stews.",
           Yellowstone: "A unique yellow carrot with a mild, sweet flavor.",
         },
-        size: "",
         weight: [500, 1000, 2000],
         quality:
           "We use renewable energy and regenerative farming techniques to grow premium organic carrots.",
@@ -304,14 +320,13 @@ const farms = [
     score: 4.8,
     products: [
       {
-        product_image1: "",
+        product_image1: carrot4_1,
         product_image2: "",
         product: "Carrot",
         varieties: {
           Standard:
             "A deeply orange, flavorful variety, ideal for raw snacking.",
         },
-        size: "",
         weight: [500, 1000, 2000],
         quality:
           "We use wind and solar energy for sustainable production of our carrots.",
@@ -323,14 +338,13 @@ const farms = [
         contact: "+64 9 654 3210",
       },
       {
-        product_image1: "",
-        product_image2: "",
+        product_image1: sweetPotato1,
+        product_image2: sweetPotato1_2,
         product: "Sweet Potato",
         varieties: {
           Orange:
             "A popular orange-fleshed variety, known for its sweetness and versatility in cooking.",
         },
-        size: "",
         weight: [1000, 2000],
         quality:
           "We use wind and solar energy for sustainable production of our sweet potatoes.",
@@ -354,7 +368,7 @@ const farms = [
     score: 5,
     products: [
       {
-        product_image1: "",
+        product_image1: carrot5_1,
         product_image2: "",
         product: "Carrot",
         varieties: {
@@ -363,7 +377,6 @@ const farms = [
           Kuroda:
             "A deep orange variety, perfect for roasting or adding to savory dishes.",
         },
-        size: "",
         weight: [500, 1000, 2000],
         quality:
           "We use solar energy and sustainable practices to grow high-quality carrots.",

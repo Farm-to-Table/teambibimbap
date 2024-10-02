@@ -1,33 +1,44 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import farms from "../../assets/farmsData";
-import fruit from "../../assets/product/fruit/fruit";
+import products from "../../assets/product/product";
 
 const ProductPage = () => {
-  const { id } = useParams();
-  const farm = farms.find((farm) => farm.id === Number(id));
-  const product = fruit.find((fruit) => fruit.id === Number(id));
+  // Destructure the farmName from useParams
+  const { farmName } = useParams();
 
-  if (!farm || !product) {
-    return <p>Farm or product not found!</p>;
+  // Find the farm by name
+  const farm = farms.find((farm) => farm.name === decodeURIComponent(farmName));
+
+  // If farm is not found, show an error message
+  if (!farm) {
+    return <p>Farm not found!</p>;
   }
 
-  const slides = [product.image1, product.image2, product.image3].filter(
-    Boolean
-  );
+  // Find products that belong to the specific farm
+  const farmProducts = products.filter((product) => product.farm === farm.name);
+
+  // If no products are found for the farm, show a message
+  if (farmProducts.length === 0) {
+    return <p>No products available from this farm!</p>;
+  }
+
+  // Handle slide functionality (if needed)
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const nextSlide = (e) => {
     e.preventDefault();
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide((prev) => (prev + 1) % farmProducts.length);
   };
 
   const prevSlide = (e) => {
     e.preventDefault();
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrentSlide(
+      (prev) => (prev - 1 + farmProducts.length) % farmProducts.length
+    );
   };
 
-  const addToCart = () => {
+  const addToCart = (product) => {
     const cartItem = {
       product: product.name,
       product_image: product.image1, // Use the first image for cart
@@ -58,97 +69,64 @@ const ProductPage = () => {
           <div className="hero-content text-neutral-content text-center">
             <div className="max-w-md">
               <h1 className="mb-5 text-2xl font-bold">
-                {farm.name}'s {product.name}
+                {farm.name}'s Products
               </h1>
             </div>
           </div>
         </div>
-        <div className="flex flex-row p-3 gap-4">
-          <div className="w-1/2 flex flex-col">
-            <div className="relative flex-grow">
-              <div className="w-full h-64">
+
+        {/* Map through farmProducts to display each product */}
+        <div className="flex flex-col p-3 gap-4">
+          {farmProducts.map((product, index) => (
+            <div key={index} className="flex flex-row border-2 p-4 rounded-lg">
+              <div className="w-1/3">
                 <img
-                  src={slides[currentSlide]}
-                  className="w-full h-full object-cover rounded-lg"
-                  alt={`Slide ${currentSlide + 1}`}
-                  style={{ objectFit: "cover" }}
+                  src={product.image1}
+                  className="w-full h-32 object-cover rounded-lg"
+                  alt={product.name}
                 />
               </div>
-              {slides.length > 1 && (
-                <div className="absolute right-2 bottom-2 flex justify-between gap-2">
-                  <button
-                    onClick={prevSlide}
-                    className="btn btn-circle btn-sm btn-warning"
-                  >
-                    ❮
-                  </button>
-                  <button
-                    onClick={nextSlide}
-                    className="btn btn-circle btn-sm btn-warning"
-                  >
-                    ❯
-                  </button>
+              <div className="w-2/3 flex flex-col justify-between p-2">
+                <h2 className="text-xl font-bold">{product.name}</h2>
+                <div className="space-y-2">
+                  {Object.entries(product.price).map(([weight, price]) => (
+                    <div
+                      key={weight}
+                      className="flex justify-between items-center"
+                    >
+                      <span className="text-lg">{weight}</span>
+                      <span className="text-lg font-bold">
+                        ${price.toFixed(2)}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              )}
-            </div>
-            <div className="flex gap-2 mt-2">
-              {product.organic && (
-                <span className="badge badge-success">Organic</span>
-              )}
-              {product.wonkey && (
-                <span className="badge badge-warning">Wonkey</span>
-              )}
-            </div>
-          </div>
-
-          <div className="w-1/2 flex flex-col justify-between border-2 p-4 rounded-lg">
-            <div>
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold">{product.name}</h2>
-                <div className="badge badge-accent badge-lg">
-                  {product.score} ★
+                <div className="mt-2">
+                  {product.onStock ? (
+                    <div className="badge badge-info badge-lg">In Stock</div>
+                  ) : (
+                    <div className="badge badge-error badge-lg">
+                      Out of Stock
+                    </div>
+                  )}
                 </div>
-              </div>
-              <div className="space-y-2">
-                {Object.entries(product.price).map(([weight, price]) => (
-                  <div
-                    key={weight}
-                    className="flex justify-between items-center"
-                  >
-                    <span className="text-lg">{weight}</span>
-                    <span className="text-lg font-bold">
-                      ${price.toFixed(2)}
-                    </span>
-                  </div>
-                ))}
+                <button
+                  onClick={() => addToCart(product)}
+                  className="btn btn-primary mt-2"
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
-            <div className="mt-4">
-              {product.onStock ? (
-                <div className="badge badge-info badge-lg">In Stock</div>
-              ) : (
-                <div className="badge badge-error badge-lg">Out of Stock</div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="px-3 pt-3 pb-10 mx-3 bg-base-200 rounded-lg">
-          <p className="italic">"{product.description}"</p>
+          ))}
         </div>
       </div>
 
       <div className="fixed bottom-12 left-0 right-0 bg-gray-300 p-3 flex justify-between">
         <button className="btn btn-square btn-info w-2/6">
-          <Link to={`/farm/${product.id}`} key={product.id}>
+          <Link to={`/farm/${farm.id}`} key={farm.id}>
             Farm Info
           </Link>
-        </button>
-        <button
-          onClick={addToCart}
-          className="btn btn-square btn-primary w-2/6"
-        >
-          Add to Cart
         </button>
       </div>
     </div>

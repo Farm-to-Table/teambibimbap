@@ -3,7 +3,7 @@ import Strawberry2 from "../../product/fruit/1.Phil Greig Strawberry Gardens-str
 import Apple1 from "../../product/fruit/3.Windmill Orchards Ltd-apple1.png";
 import Apple2 from "../../product/fruit/3.Windmill Orchards Ltd-apple2.png";
 import Apple3 from "../../product/fruit/3.Windmill Orchards Ltd-apple3.png";
-const fruit = [
+const product = [
   {
     id: 1,
     catergory: "fruit",
@@ -45,4 +45,4 @@ const fruit = [
     },
   },
 ];
-export default fruit;
+export default product;

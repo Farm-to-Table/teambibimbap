@@ -9,6 +9,7 @@ import Vege from "../Pages/Vege/Vege";
 import Salad from "../Pages/Salad/Salad";
 import Fruit from "../Pages/Fruit/Fruit";
 import ProductPage from "../Pages/productPage/productPage";
+import Payment from "../Pages/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -19,11 +20,12 @@ export const router = createBrowserRouter([
       { path: "", element: <Home /> },
       { path: "cart", element: <Cart /> },
       { path: "farm/:id", element: <FarmDetailPage /> },
-      { path: "product/:id", element: <ProductPage /> },
+      { path: "product/:farmName", element: <ProductPage /> },
       { path: "map", element: <Map /> },
       { path: "vege", element: <Vege /> },
       { path: "salad", element: <Salad /> },
       { path: "fruit", element: <Fruit /> },
+      { path: "payment", element: <Payment /> },
     ],
   },
 ]);
