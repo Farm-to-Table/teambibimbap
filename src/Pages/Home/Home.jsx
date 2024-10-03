@@ -103,7 +103,7 @@ const Home = () => {
               <Link
                 to={image.url}
                 key={index}
-                className="w-24 h-24 text-5xl mb-3 flex items-center justify-center object-cover rounded-full shadow-md shadow-black"
+                className="w-24 h-24 text-5xl mb-3 flex items-center justify-center object-cover rounded-full "
                 style={{ backgroundColor: bgColor, color: "#fff" }}
               >
                 {image.icon}
@@ -113,27 +113,34 @@ const Home = () => {
         </div>
 
         <div>
-          <div className="flex flex-row align-middle bg-base-200 p-3 items-center gap-3">
+          <div className="flex flex-row w-full border-2 bg-base-200 p-3 items-center justify-center gap-3">
             <img
               src={recommedation}
               alt="test"
               className="w-10 h-10 object-cover rounded-full"
             />
-            <h1 className="font-spicyrice">Today's Recommendation</h1>
+            <h1 className="font-spicyrice text-en">Today's Recommendation</h1>
           </div>
         </div>
 
         {/* Corrected recommendation product list */}
         <div className="flex flex-row justify-center space-x-4 ">
           {RecommandData.map((product, index) => (
-            <Link to={`/teambibimbap/product/${product.farm}`} key={index}>
+            <Link
+              to={`/teambibimbap/product/${product.farm}/${product.name}`}
+              key={index}
+            >
               <div className="bg-base-300 w-24 h-24 rounded-full flex items-center justify-center">
                 <img
                   src={product.image1}
                   alt={product.name}
-                  className="w-full h-full object-cover rounded-full shadow-md shadow-black"
+                  className="w-full h-full object-cover rounded-full "
                 />
               </div>
+
+              <h1>{product.name}</h1>
+              <p>score : {product.score}</p>
+              <p>무게 선택 및 가격변동</p>
             </Link>
           ))}
         </div>

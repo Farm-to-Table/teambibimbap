@@ -7,9 +7,9 @@ import Map from "../Pages/Map/Map";
 import Vege from "../Pages/Vege/Vege";
 import Salad from "../Pages/Salad/Salad";
 import Fruit from "../Pages/Fruit/Fruit";
-import ProductPage from "../Pages/ProductPage/ProductPage";
 import Payment from "../Pages/Payment/Payment";
 import Error from "../Pages/Error/Error";
+import ProductPage from "../Pages/productPage/productPage";
 export const router = createBrowserRouter([
   {
     path: "/teambibimbap/",
@@ -20,6 +20,7 @@ export const router = createBrowserRouter([
       { path: "cart", element: <Cart /> }, // 변경
       { path: "farm/:id", element: <FarmDetailPage /> }, // 변경
       { path: "product/:farmName", element: <ProductPage /> }, // 변경
+      { path: "product/:farmName/:productName", element: <ProductPage /> }, // 조정된 라우트
       { path: "map", element: <Map /> }, // 변경
       { path: "vege", element: <Vege /> }, // 변경
       { path: "salad", element: <Salad /> }, // 변경

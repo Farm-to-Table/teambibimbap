@@ -63,6 +63,7 @@ const Navbar = () => {
               clipRule="evenodd"
             />
           </svg>
+        
         </label>
         {/* Dropdown for search results */}
         {showDropdown && (

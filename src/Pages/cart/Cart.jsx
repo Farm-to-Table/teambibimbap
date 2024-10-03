@@ -142,7 +142,6 @@ const Cart = () => {
             {/* 날짜별 슬롯과 체크박스 표시 */}
             {selectedSchool && (
               <div className="mt-4 text-center">
-                <h3 className="text-lg font-bold">Available Slots:</h3>
                 <table className="table-auto w-full mt-2">
                   <thead>
                     <tr>

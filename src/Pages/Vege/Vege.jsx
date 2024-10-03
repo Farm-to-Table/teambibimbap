@@ -10,7 +10,7 @@ const Vege = () => {
   const [isScoreHighToLow, setIsScoreHighToLow] = useState(true); // State to toggle score sorting
 
   // Handle filtering for organic and wonkey products
-  const filteredFruit = product.filter((product) => {
+  const filteredVege = product.filter((product) => {
     // Filter by organic and wonkey conditions
     const organicCondition = isOrganicOnly ? product.organic : true;
     const wonkeyCondition = isWonkeyOnly ? product.wonkey : true;
@@ -20,7 +20,7 @@ const Vege = () => {
   });
 
   // Handle sorting by name or score
-  const sortedFruit = [...filteredFruit].sort((a, b) => {
+  const sortedVege = [...filteredVege].sort((a, b) => {
     if (sortOption === "name") {
       return a.name.localeCompare(b.name); // Sort alphabetically by name
     }
@@ -71,8 +71,11 @@ const Vege = () => {
 
       {/* Product listing */}
       <div>
-        {sortedFruit.map((product, index) => (
+        {/* 라우터 설정 확인 */}
+        {console.log(sortedVege)}
+        {sortedVege.map((product, index) => (
           <Link to={`/teambibimbap/product/${product.farm}`} key={index}>
+            {console.log(product.farm)}
             <div className="shadow-lg rounded-lg flex flex-row justify-center items-center relative m-3">
               <div className="absolute top-2 -left-2">
                 {product.onStock && (

@@ -4,9 +4,9 @@ import farms from "../../assets/farmsData";
 import products from "../../assets/product/product";
 
 const ProductPage = () => {
-  // Destructure the farmName from useParams
-  const { farmName } = useParams();
-
+  // Destructure the farmName and productName from useParams
+  const { farmName, productName: selectedProductName } = useParams();
+  console.log(farmName, selectedProductName);
   // Find the farm by name
   const farm = farms.find((farm) => farm.name === decodeURIComponent(farmName));
 
@@ -16,27 +16,27 @@ const ProductPage = () => {
   }
 
   // Find products that belong to the specific farm
-  const farmProducts = products.filter((product) => product.farm === farm.name);
+  let farmProducts = products.filter((product) => product.farm === farm.name);
+
+  // If there is a selected product name, move it to the top
+  if (selectedProductName) {
+    const selectedProduct = farmProducts.find(
+      (product) => product.name === selectedProductName
+    );
+    if (selectedProduct) {
+      // Remove the selected product from its current position
+      farmProducts = farmProducts.filter(
+        (product) => product.name !== selectedProductName
+      );
+      // Add the selected product at the beginning of the array
+      farmProducts.unshift(selectedProduct);
+    }
+  }
 
   // If no products are found for the farm, show a message
   if (farmProducts.length === 0) {
     return <p>No products available from this farm!</p>;
   }
-
-  // Handle slide functionality (if needed)
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const nextSlide = (e) => {
-    e.preventDefault();
-    setCurrentSlide((prev) => (prev + 1) % farmProducts.length);
-  };
-
-  const prevSlide = (e) => {
-    e.preventDefault();
-    setCurrentSlide(
-      (prev) => (prev - 1 + farmProducts.length) % farmProducts.length
-    );
-  };
 
   const addToCart = (product) => {
     const cartItem = {
@@ -114,7 +114,7 @@ const ProductPage = () => {
                   onClick={() => addToCart(product)}
                   className="btn btn-primary mt-2"
                 >
-                  Add to Cart
+                  Add to Cart, 무게 선택해서 추가
                 </button>
               </div>
             </div>

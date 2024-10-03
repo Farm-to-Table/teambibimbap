@@ -131,7 +131,9 @@ const Map = () => {
                 <Popup>{school.address}</Popup>
                 <Tooltip permanent direction="left" offset={[0, 0]}>
                   {school.name}
-                </Tooltip>
+                </Tooltip>  
+
+              {/* 누르면 나오게  */}
               </Marker>
 
               <Circle
@@ -144,7 +146,7 @@ const Map = () => {
                   fillOpacity: 0.1,
                   color: "blue",
                 }}
-                radius={3000}
+                radius={20000}
               />
 
               {farms.map((farm, index) => (

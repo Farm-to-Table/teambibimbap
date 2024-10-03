@@ -163,7 +163,7 @@ const product = [
     id: 7,
     category: "vege",
     name: "Carrot",
-    farm: "Golden Roots Ltd ",
+    farm: "Golden Roots Ltd",
     image1: carrot1_1,
     image2: "",
     image3: "",
