@@ -9,7 +9,8 @@ import Salad from "../Pages/Salad/Salad";
 import Fruit from "../Pages/Fruit/Fruit";
 import Payment from "../Pages/Payment/Payment";
 import Error from "../Pages/Error/Error";
-import ProductPage from "../Pages/productPage/productPage";
+import ProductPage from "../Pages/ProductPage/ProductPage";
+
 
 export const router = createBrowserRouter([
   {
