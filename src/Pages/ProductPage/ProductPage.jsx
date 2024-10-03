@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import farms from "../../assets/farmsData";
 import products from "../../assets/product/product";
 
-const ProductPage = () => {
+const productPage = () => {
   // Destructure the farmName and productName from useParams
   const { farmName, productName: selectedProductName } = useParams();
   console.log(farmName, selectedProductName);
@@ -133,4 +133,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default productPage;

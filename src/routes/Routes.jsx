@@ -10,6 +10,7 @@ import Fruit from "../Pages/Fruit/Fruit";
 import Payment from "../Pages/Payment/Payment";
 import Error from "../Pages/Error/Error";
 import ProductPage from "../Pages/productPage/productPage";
+
 export const router = createBrowserRouter([
   {
     path: "/teambibimbap/",
