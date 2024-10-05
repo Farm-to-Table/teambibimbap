@@ -71,11 +71,8 @@ const Vege = () => {
 
       {/* Product listing */}
       <div>
-        {/* 라우터 설정 확인 */}
-        {console.log(sortedVege)}
         {sortedVege.map((product, index) => (
           <Link to={`/teambibimbap/product/${product.farm}`} key={index}>
-            {console.log(product.farm)}
             <div className="shadow-lg rounded-lg flex flex-row justify-center items-center relative m-3">
               <div className="absolute top-2 -left-2">
                 {product.onStock && (
