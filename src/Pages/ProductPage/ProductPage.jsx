@@ -1,61 +1,79 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import farms from "../../assets/farmsData";
 import products from "../../assets/product/product";
 
 const ProductPage = () => {
-  // Destructure the farmName and productName from useParams
   const { farmName, productName: selectedProductName } = useParams();
-  console.log(farmName, selectedProductName);
-  // Find the farm by name
   const farm = farms.find((farm) => farm.name === decodeURIComponent(farmName));
 
-  // If farm is not found, show an error message
   if (!farm) {
     return <p>Farm not found!</p>;
   }
 
-  // Find products that belong to the specific farm
   let farmProducts = products.filter((product) => product.farm === farm.name);
 
-  // If there is a selected product name, move it to the top
   if (selectedProductName) {
     const selectedProduct = farmProducts.find(
       (product) => product.name === selectedProductName
     );
     if (selectedProduct) {
-      // Remove the selected product from its current position
       farmProducts = farmProducts.filter(
         (product) => product.name !== selectedProductName
       );
-      // Add the selected product at the beginning of the array
       farmProducts.unshift(selectedProduct);
     }
   }
 
-  // If no products are found for the farm, show a message
   if (farmProducts.length === 0) {
     return <p>No products available from this farm!</p>;
   }
 
+  const [selectedWeight, setSelectedWeight] = useState("");
+  const [quantity, setQuantity] = useState(1); // Default quantity set to 1
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
+
   const addToCart = (product) => {
+    if (!selectedWeight) {
+      setToastMessage("🚫 Please select a weight!");
+      setShowToast(true);
+      return;
+    }
+
     const cartItem = {
       product: product.name,
-      product_image: product.image1, // Use the first image for cart
-      price: product.price, // Include the entire price object
-      selectedWeight: Object.keys(product.price)[0], // Set default weight
-      quantity: 1, // Start with quantity 1
+      product_image: product.image1,
+      price: product.price[selectedWeight],
+      selectedWeight: selectedWeight,
+      quantity: quantity,
     };
 
-    // Get existing cart items from localStorage
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingItemIndex = existingCart.findIndex(
+      (item) =>
+        item.product === cartItem.product &&
+        item.selectedWeight === cartItem.selectedWeight
+    );
 
-    // Add new item to cart
-    existingCart.push(cartItem);
+    if (existingItemIndex !== -1) {
+      existingCart[existingItemIndex].quantity += quantity;
+    } else {
+      existingCart.push(cartItem);
+    }
 
-    // Save updated cart back to localStorage
     localStorage.setItem("cart", JSON.stringify(existingCart));
-    alert("Item added to cart!");
+
+    // Update the toast message to include product details
+    setToastMessage(
+      `✅ ${quantity} x ${cartItem.selectedWeight} of ${cartItem.product} added to cart!`
+    );
+    setShowToast(true);
+
+    // Set a timer to hide the toast after 3 seconds
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
   };
 
   return (
@@ -71,24 +89,49 @@ const ProductPage = () => {
               <h1 className="mb-5 text-2xl font-bold">
                 {farm.name}'s Products
               </h1>
+              {/* Added descriptive text about the farm */}
+              <p className="mb-4 text-lg">
+                Discover fresh and organic products from {farm.name}.
+              </p>
+              {/* Farm Info button moved inside the hero section */}
+              <Link to={`/teambibimbap/farm/${farm.id}`} key={farm.id}>
+                <button className="btn btn-square w-full border border-white bg-transparent text-white hover:bg-white hover:text-gray-800">
+                  Learn About the Farm
+                </button>
+              </Link>
             </div>
           </div>
         </div>
 
-        {/* Map through farmProducts to display each product */}
         <div className="flex flex-col p-3 gap-4">
           {farmProducts.map((product, index) => (
-            <div key={index} className="flex flex-row border-2 p-4 rounded-lg">
-              <div className="w-1/3">
+            <div
+              key={index}
+              className="flex flex-col border-2 p-4 rounded-lg shadow-lg bg-white"
+            >
+              <div className="relative w-full mb-4">
                 <img
                   src={product.image1}
-                  className="w-full h-32 object-cover rounded-lg"
+                  className="w-full h-48 object-cover rounded-lg"
                   alt={product.name}
                 />
+                {product.onStock ? (
+                  <div className="absolute top-2 right-2 bg-primary text-white text-sm font-semibold rounded-full px-2 py-1">
+                    In Stock
+                  </div>
+                ) : (
+                  <div className="absolute top-2 right-2 bg-secondary text-white text-sm font-semibold rounded-full px-2 py-1">
+                    Out of Stock
+                  </div>
+                )}
               </div>
-              <div className="w-2/3 flex flex-col justify-between p-2">
-                <h2 className="text-xl font-bold">{product.name}</h2>
-                <div className="space-y-2">
+              <h2 className="text-xl font-bold mb-2">{product.name}</h2>
+              <p className="mb-4 text-gray-700">{product.description}</p>
+
+              {/* Weight and Price Table */}
+              <div className="mb-4">
+                <h3 className="font-semibold">Price by Weight:</h3>
+                <div className="space-y-1">
                   {Object.entries(product.price).map(([weight, price]) => (
                     <div
                       key={weight}
@@ -101,33 +144,66 @@ const ProductPage = () => {
                     </div>
                   ))}
                 </div>
-                <div className="mt-2">
-                  {product.onStock ? (
-                    <div className="badge badge-info badge-lg">In Stock</div>
-                  ) : (
-                    <div className="badge badge-error badge-lg">
-                      Out of Stock
-                    </div>
-                  )}
-                </div>
-                <button
-                  onClick={() => addToCart(product)}
-                  className="btn btn-primary mt-2"
-                >
-                  Add to Cart, 무게 선택해서 추가
-                </button>
               </div>
+
+              {/* Flex row for weight and quantity selection */}
+              <div className="flex justify-between mt-2">
+                <select
+                  onChange={(e) => setSelectedWeight(e.target.value)}
+                  className="select select-bordered w-1/2 mr-2 outline-none focus:ring-0"
+                >
+                  <option value="">Select Weight</option>
+                  {Object.keys(product.price).map((weight) => (
+                    <option key={weight} value={weight}>
+                      {weight}
+                    </option>
+                  ))}
+                </select>
+
+                {/* Quantity selection */}
+                <div className="flex items-center w-1/2">
+                  <label className="mr-2 text-lg">Quantity:</label>
+                  <input
+                    type="number"
+                    min="1"
+                    value={quantity}
+                    onChange={(e) => setQuantity(Number(e.target.value))}
+                    className="border border-gray-300 rounded-md w-16 p-1 text-center"
+                  />
+                </div>
+              </div>
+
+              <button
+                onClick={() => addToCart(product)}
+                className="btn btn-primary mt-4 w-full"
+                disabled={!selectedWeight} // Disable button if no weight is selected
+              >
+                Add to Cart
+              </button>
             </div>
           ))}
         </div>
       </div>
 
+      {/* Toast Notification */}
+      {showToast && (
+        <div className="toast toast-top toast-center z-50">
+          <div className="alert alert-success bg-green-500 text-white shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl">
+            <div>
+              <span>{toastMessage}</span>
+              <button
+                className="btn btn-sm btn-circle btn-ghost"
+                onClick={() => setShowToast(false)}
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="fixed bottom-12 left-0 right-0 bg-gray-300 p-3 flex justify-between">
-        <Link to={`/teambibimbap/farm/${farm.id}`} key={farm.id}>
-          <button className="btn btn-square btn-info w-full p-3">
-            Farm Info
-          </button>
-        </Link>
+        {/* Removed Farm Info button here since it's now in the hero section */}
       </div>
     </div>
   );

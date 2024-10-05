@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import Navbar from "./Components/Nav/Navbar";
-import Moblie_Nav from "./Pages/Moblie_Nav/Moblie_Nav";
+import Mobile_Nav from "./Pages/Mobile_Nav/Mobile_Nav";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Outlet />
       </div>
       <div className="fixed bottom-0 left-0 w-full">
-        <Moblie_Nav />
+        <Mobile_Nav />
       </div>
     </div>
   );

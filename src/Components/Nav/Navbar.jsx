@@ -1,43 +1,111 @@
-import { React, useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { React, useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { CiBellOn } from "react-icons/ci";
-import farms from "../../assets/farmsData"; // Ensure the farms data is imported
+import farms from "../../assets/farmsData";
+
+// Custom event for localStorage changes
+const localStorageChanged = new Event("localStorageChanged");
+
+// Wrap localStorage setItem to dispatch the custom event
+const originalSetItem = localStorage.setItem;
+localStorage.setItem = function (key, value) {
+  originalSetItem.apply(this, arguments);
+  if (key === "orderDetails") {
+    window.dispatchEvent(localStorageChanged);
+  }
+};
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false); // State to manage dropdown visibility
-  const navigate = useNavigate(); // Initialize navigate
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [orders, setOrders] = useState(null);
+  const navigate = useNavigate();
+  const notificationTimer = useRef(null);
+
+  const loadOrderDetails = () => {
+    const orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+    setOrders(orderDetails);
+  };
+
+  useEffect(() => {
+    loadOrderDetails();
+
+    const handleStorageChange = () => {
+      loadOrderDetails();
+    };
+
+    window.addEventListener("localStorageChanged", handleStorageChange);
+    window.addEventListener("storage", handleStorageChange); // For changes from other tabs
+
+    return () => {
+      window.removeEventListener("localStorageChanged", handleStorageChange);
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (orders && orders.status === "paid" && !showNotification) {
+      // Clear any existing timer
+      if (notificationTimer.current) {
+        clearTimeout(notificationTimer.current);
+      }
+
+      // Set a new timer
+      notificationTimer.current = setTimeout(() => {
+        setShowNotification(true);
+      }, 5000);
+    } else if (!orders || orders.status !== "paid") {
+      // Clear the timer and hide notification if status is not "paid"
+      if (notificationTimer.current) {
+        clearTimeout(notificationTimer.current);
+      }
+      setShowNotification(false);
+    }
+
+    // Cleanup function to clear the timer when component unmounts or orders change
+    return () => {
+      if (notificationTimer.current) {
+        clearTimeout(notificationTimer.current);
+      }
+    };
+  }, [orders]);
 
   const handleOnChange = (e) => {
     const value = e.target.value;
     setSearch(value);
 
-    // Filter farms based on farm name and product names
-    const results = farms.filter(
-      (farm) =>
-        farm.name.toLowerCase().includes(value.toLowerCase()) ||
-        farm.products.some((product) =>
-          product.product.toLowerCase().includes(value.toLowerCase())
-        )
-    );
+    const results = farms
+      .flatMap((farm) =>
+        farm.products
+          .filter((product) =>
+            product.product.toLowerCase().includes(value.toLowerCase())
+          )
+          .map((product) => ({
+            ...product,
+            farmId: farm.id, // Add farm ID here
+            farmName: farm.name,
+          }))
+      )
+      .filter(Boolean);
 
     setFilteredResults(results);
-    setShowDropdown(value.length > 0); // Show dropdown if there's input
+    setShowDropdown(value.length > 0);
   };
 
-  const handleFarmClick = (id) => {
-    // Navigate to the farm detail page
-    navigate(`/teambibimbap/farm/${id}`);
-    setSearch(""); // Clear search input
-    setFilteredResults([]); // Clear filtered results
-    setShowDropdown(false); // Hide dropdown
+  const handleProductClick = (farmId) => {
+    // Navigate to the appropriate farm/product page if necessary
+    setSearch("");
+    setFilteredResults([]);
+    setShowDropdown(false);
+    navigate(`/teambibimbap/farm/${farmId}`);
   };
 
   return (
     <div className="border-b-base-300 p-3 flex flex-row sm:flex-row items-center justify-between align-middle">
-      <Link to="/teambibimbap">
+      <Link to="/teambibimbap/">
         <div className="flex items-center mb-4 md:mb-0">
           <img src={logo} alt="logo" width="100rem" className="mr-4" />
         </div>
@@ -63,68 +131,26 @@ const Navbar = () => {
               clipRule="evenodd"
             />
           </svg>
-        
         </label>
-        {/* Dropdown for search results */}
         {showDropdown && (
           <ul className="absolute bg-white border border-gray-300 w-full rounded-lg shadow-lg z-10 mt-1">
             {filteredResults.length > 0 ? (
-              filteredResults.map((farm, index) => {
-                const farmMatches = farm.name
-                  .toLowerCase()
-                  .includes(search.toLowerCase());
-                const productMatches = farm.products.filter((product) =>
-                  product.product.toLowerCase().includes(search.toLowerCase())
-                );
-
-                return (
-                  <li key={index}>
-                    {/* Display the farm name if it matches the search */}
-                    {farmMatches && (
-                      <div
-                        className="flex items-center cursor-pointer hover:bg-base-300 p-2 transition-colors duration-200"
-                        onClick={() => handleFarmClick(farm.id)}
-                      >
-                        <img
-                          src={farm.image}
-                          alt={farm.name}
-                          className="w-12 h-12 mr-2 rounded"
-                        />
-                        <span className="font-bold">{farm.name}</span>
-                      </div>
-                    )}
-
-                    {/* Display products if farm doesn't match but products do */}
-                    {productMatches.length > 0 && !farmMatches && (
-                      <div>
-                        <div
-                          className="flex items-center cursor-pointer hover:bg-base-300 p-2 transition-colors duration-200"
-                          onClick={() => handleFarmClick(farm.id)}
-                        >
-                          <img
-                            src={farm.main_image}
-                            alt={farm.name}
-                            className="w-12 h-12 mr-2 rounded"
-                          />
-                          <span className="font-bold">{farm.name}</span>
-                        </div>
-                        <ul className="pl-4 flex flex-col">
-                          {productMatches.map((product, productIndex) => (
-                            <li
-                              key={productIndex}
-                              className="flex items-center"
-                            >
-                              <span className="ml-2">{product.name}</span>
-
-                              {/* Ensure sizes are handled correctly */}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </li>
-                );
-              })
+              filteredResults.map((item, index) => (
+                <li key={index}>
+                  <div
+                    className="flex items-center cursor-pointer hover:bg-base-300 p-2 transition-colors duration-200"
+                    onClick={() => handleProductClick(item.farmId)}
+                  >
+                    {console.log(item.farmId)}
+                    <img
+                      src={item.product_image1}
+                      alt={item.product}
+                      className="w-12 h-12 mr-2 rounded"
+                    />
+                    <span className="font-bold">{`${item.product} - ${item.farmName}`}</span>
+                  </div>
+                </li>
+              ))
             ) : (
               <li className="p-2 text-center">
                 <span role="img" aria-label="no-results" className="mr-2">
@@ -137,7 +163,45 @@ const Navbar = () => {
         )}
       </div>
       <div className="flex items-center mb-4 md:mb-0">
-        <CiBellOn className="text-3xl" />
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn m-1 bg-white border-none relative"
+          >
+            <CiBellOn className="text-3xl" />
+            {showNotification && (
+              <div className="absolute top-0 right-2 flex items-center justify-center">
+                <span className="absolute inline-flex h-5 w-5 rounded-full bg-blue-400 opacity-75 animate-ping"></span>
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-blue-500"></span>
+              </div>
+            )}
+          </div>
+
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-64 p-2 shadow"
+          >
+            {orders ? (
+              <li>
+                <div className="p-2 flex flex-col">
+                  <div className="text-start w-full">
+                    <h3 className="font-bold">Team123 is delivering now! 🚚</h3>
+                  </div>
+                  <div className="w-full text-start flex-row flex ">
+                    <p>Date: {orders.date}</p>
+                    <p>School: {orders.school.name}</p>
+                    <p>Slot: A10</p>
+                  </div>
+                </div>
+              </li>
+            ) : (
+              <li>
+                <a>No recent orders</a>
+              </li>
+            )}
+          </ul>
+        </div>
       </div>
     </div>
   );

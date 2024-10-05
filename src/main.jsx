@@ -9,7 +9,5 @@ import { router } from "./routes/Routes.jsx";
 import React from "react";
 
 ReactDom.createRoot(document.getElementById("root")).render(
-  <RecoilRoot>
-    <RouterProvider router={router} />
-  </RecoilRoot>
+  <RouterProvider router={router} />
 );

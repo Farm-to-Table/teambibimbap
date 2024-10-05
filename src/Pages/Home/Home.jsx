@@ -14,6 +14,12 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [showToast, setShowToast] = useState(false);
+  const [products, setProducts] = useState(
+    RecommandData.map((product) => ({
+      ...product,
+      selectedWeight: Object.keys(product.price)[0], // 기본 무게 설정
+    }))
+  );
 
   const images = [
     { icon: <PiCarrotBold />, url: "/teambibimbap/vege", type: "vege" },
@@ -53,6 +59,15 @@ const Home = () => {
   const resetLocation = () => {
     setSelectedLocation("");
     saveSelectedSchool(null);
+  };
+
+  const handleWeightChange = (index, event) => {
+    const newWeight = event.target.value;
+    setProducts((prevProducts) => {
+      const updatedProducts = [...prevProducts];
+      updatedProducts[index].selectedWeight = newWeight;
+      return updatedProducts;
+    });
   };
 
   return (
@@ -113,7 +128,7 @@ const Home = () => {
         </div>
 
         <div>
-          <div className="flex flex-row w-full border-2 bg-base-200 p-3 items-center justify-center gap-3">
+          <div className="flex flex-row w-full  bg-base-200 p-3 items-center justify-center gap-3">
             <img
               src={recommedation}
               alt="test"
@@ -123,25 +138,78 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Corrected recommendation product list */}
         <div className="flex flex-row justify-center space-x-4 ">
-          {RecommandData.map((product, index) => (
-            <Link
-              to={`/teambibimbap/product/${product.farm}/${product.name}`}
-              key={index}
-            >
-              <div className="bg-base-300 w-24 h-24 rounded-full flex items-center justify-center">
-                <img
-                  src={product.image1}
-                  alt={product.name}
-                  className="w-full h-full object-cover rounded-full "
-                />
+          {products.map((product, index) => (
+            <div key={index}>
+              <Link
+                to={`/teambibimbap/product/${product.farm}/${product.name}`}
+                className="block" // 이미지 주위를 클릭 가능하도록 전체를 block으로 감쌈
+              >
+                <div className="bg-base-300 w-24 h-24 rounded-full flex items-center justify-center">
+                  <img
+                    src={product.image1}
+                    alt={product.name}
+                    className="w-full h-full object-cover rounded-full "
+                  />
+                </div>
+              </Link>
+              <div className="rating flex items-center flex-row justify-center">
+                {/* Render stars based on product score */}
+                {[...Array(5)].map((_, i) => (
+                  <input
+                    key={i}
+                    type="radio"
+                    name={`rating-${product.id}`}
+                    className={`mask mask-star-2 bg-orange-400 w-2 ${
+                      i < product.score ? "checked" : ""
+                    }`}
+                    defaultChecked={i < product.score} // Activate star based on score
+                    readOnly
+                  />
+                ))}
               </div>
 
-              <h1>{product.name}</h1>
-              <p>score : {product.score}</p>
-              <p>무게 선택 및 가격변동</p>
-            </Link>
+              <h1 className="text-center">{product.name}</h1>
+
+              <div className="flex items-center">
+                <select
+                  value={
+                    product.selectedWeight || Object.keys(product.price)[0]
+                  } // 기본값으로 첫 번째 무게 선택
+                  onChange={(e) => handleWeightChange(index, e)}
+                  className="select mb-2 w-24 border-none outline-none text-sm p-1 focus:ring-0 focus:outline-none"
+                  style={{
+                    boxShadow: "none",
+                    border: "none",
+                    outline: "none",
+                  }}
+                >
+                  {Object.keys(product.price).map((weight) => (
+                    <option
+                      key={weight}
+                      value={weight}
+                      className="border-none outline-none"
+                      style={{ border: "none", outline: "none" }}
+                    >
+                      {weight}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* 무게에 따른 가격 표시 */}
+              <p className="text-center">
+                Price:{" "}
+                <strong>
+                  {
+                    product.price[
+                      product.selectedWeight || Object.keys(product.price)[0]
+                    ]
+                  }{" "}
+                  $
+                </strong>
+              </p>
+            </div>
           ))}
         </div>
       </div>

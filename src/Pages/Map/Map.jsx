@@ -131,9 +131,9 @@ const Map = () => {
                 <Popup>{school.address}</Popup>
                 <Tooltip permanent direction="left" offset={[0, 0]}>
                   {school.name}
-                </Tooltip>  
+                </Tooltip>
 
-              {/* 누르면 나오게  */}
+                {/* 누르면 나오게  */}
               </Marker>
 
               <Circle
@@ -165,11 +165,6 @@ const Map = () => {
                   <Popup>
                     <div onClick={() => handleFarmClick(farm)}>{farm.name}</div>
                   </Popup>
-                  {(!selectedFarm || selectedFarm.name !== farm.name) && (
-                    <Tooltip permanent direction="right" offset={[10, -15]}>
-                      {farm.name}
-                    </Tooltip>
-                  )}
                 </Marker>
               ))}
             </MapContainer>

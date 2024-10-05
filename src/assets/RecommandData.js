@@ -21,7 +21,7 @@ const RecommandData = [
     organic: false,
     onStock: false,
     wonkey: true,
-    score: 4.8,
+    score: 3,
     price: {
       "1kg": 4,
       "2kg": 8,
@@ -40,7 +40,7 @@ const RecommandData = [
     organic: false,
     onStock: false,
     wonkey: false,
-    score: 4.5,
+    score: 4,
     price: {
       "500g": 6.0,
       "1kg": 11.0,
