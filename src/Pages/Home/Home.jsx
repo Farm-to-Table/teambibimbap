@@ -169,7 +169,7 @@ const Home = () => {
                 ))}
               </div>
 
-              <h1 className="text-center">{product.name}</h1>
+              <h1 className="text-center font-creterount">{product.name}</h1>
 
               <div className="flex items-center">
                 <select
@@ -177,7 +177,7 @@ const Home = () => {
                     product.selectedWeight || Object.keys(product.price)[0]
                   } // 기본값으로 첫 번째 무게 선택
                   onChange={(e) => handleWeightChange(index, e)}
-                  className="select mb-2 w-24 border-none outline-none text-sm p-1 focus:ring-0 focus:outline-none"
+                  className="font-creterount select mb-2 w-24 border-none outline-none text-sm p-1 focus:ring-0 focus:outline-none"
                   style={{
                     boxShadow: "none",
                     border: "none",
@@ -198,7 +198,7 @@ const Home = () => {
               </div>
 
               {/* 무게에 따른 가격 표시 */}
-              <p className="text-center">
+              <p className="text-center font-creterount">
                 Price:{" "}
                 <strong>
                   {

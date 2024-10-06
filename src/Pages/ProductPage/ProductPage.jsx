@@ -117,11 +117,11 @@ const ProductPage = () => {
                 />
                 {product.onStock ? (
                   <div className="absolute top-2 right-2 bg-primary text-white text-sm font-semibold rounded-full px-2 py-1">
-                    In Stock
+                    Harvested
                   </div>
                 ) : (
                   <div className="absolute top-2 right-2 bg-secondary text-white text-sm font-semibold rounded-full px-2 py-1">
-                    Out of Stock
+                    Harvesting Soon
                   </div>
                 )}
               </div>

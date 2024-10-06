@@ -110,7 +110,7 @@ const product = [
     description:
       "At Westgate Green Farms, we use the latest farming technologies and strict quality control measures to grow our produce. From cultivation to harvest and packaging, we prioritize safety and quality to provide reliable onions.",
     organic: false,
-    onStock: false,
+    onStock: true,
     wonkey: true,
     score: 4.7,
     price: {
@@ -169,7 +169,7 @@ const product = [
     image3: "",
     description: "Get your eco-friendly carrots from Golden Roots Ltd today!",
     organic: false,
-    onStock: false,
+    onStock: true,
     wonkey: true,
     score: 5,
     price: {
@@ -189,7 +189,7 @@ const product = [
     description:
       "Our farm runs on renewable energy and uses regenerative farming techniques to ensure that every carrot you enjoy is both healthy and sustainable.",
     organic: true,
-    onStock: false,
+    onStock: true,
     wonkey: false,
     score: 4,
     price: {
@@ -209,7 +209,7 @@ const product = [
     description:
       "Our farm runs on renewable energy and uses regenerative farming techniques to ensure that every carrot you enjoy is both healthy and sustainable.",
     organic: false,
-    onStock: false,
+    onStock: true,
     wonkey: true,
     score: 4.8,
     price: {

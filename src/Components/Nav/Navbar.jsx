@@ -141,7 +141,7 @@ const Navbar = () => {
                     className="flex items-center cursor-pointer hover:bg-base-300 p-2 transition-colors duration-200"
                     onClick={() => handleProductClick(item.farmId)}
                   >
-                    {console.log(item.farmId)}
+                  
                     <img
                       src={item.product_image1}
                       alt={item.product}
@@ -186,7 +186,7 @@ const Navbar = () => {
               <li>
                 <div className="p-2 flex flex-col">
                   <div className="text-start w-full">
-                    <h3 className="font-bold">Team123 is delivering now! 🚚</h3>
+                    <h3 className="font-bold">Fresh box is delivering now! 🚚</h3>
                   </div>
                   <div className="w-full text-start flex-row flex ">
                     <p>Date: {orders.date}</p>

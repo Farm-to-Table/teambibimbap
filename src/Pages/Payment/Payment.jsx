@@ -33,9 +33,8 @@ const Payment = () => {
       // Save the updated order details back to localStorage
       localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
       localStorage.removeItem("cart"); // Clear the cart from localStorage
-      console.log("Order status updated to 'paid'");
     } else {
-      console.log("No order details found in localStorage");
+      console.error("Order details not found in localStorage");
     }
   };
 
