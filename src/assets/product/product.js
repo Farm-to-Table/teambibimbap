@@ -395,7 +395,7 @@ const product = [
     id: 14,
     category: "vege",
     name: "Carrot-Beta Bites",
-    farm: "Wilcox ",
+    farm: "Wilcox",
     image1: wilcox_carrot,
     image2: "",
     image3: "",
