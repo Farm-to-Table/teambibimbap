@@ -21,6 +21,7 @@ import schoolData, {
 import schoolMarker from "../../assets/schoolMarker.png";
 import mock_map from "../../assets/mock_map.png";
 import school_profile from "../../assets/school_profile.jpg";
+import new_farm from "../../assets/new_farm.png";
 
 const mainIcon = new L.Icon({
   iconUrl: main_pin,
@@ -38,6 +39,13 @@ const schoolIcon = new L.Icon({
 
 const locationIcon = new L.Icon({
   iconUrl: pin,
+  iconSize: [35, 35],
+  iconAnchor: [12, 25],
+  popupAnchor: [0, -25],
+});
+
+const newFarmIcon = new L.Icon({
+  iconUrl: new_farm,
   iconSize: [35, 35],
   iconAnchor: [12, 25],
   popupAnchor: [0, -25],
@@ -81,9 +89,14 @@ const Map = () => {
     setShowToast(true);
   };
 
-  const resetLocation = () => {
-    setSchool(null);
-    saveSelectedSchool(null);
+  const getMarkerIcon = (farm) => {
+    if (selectedFarm && selectedFarm.name === farm.name) {
+      return mainIcon;
+    }
+    if ([11, 12, 13, 14].includes(farm.id)) {
+      return newFarmIcon;
+    }
+    return locationIcon;
   };
 
   return (
@@ -132,8 +145,6 @@ const Map = () => {
                 <Tooltip permanent direction="left" offset={[0, 0]}>
                   {school.name}
                 </Tooltip>
-
-                {/* 누르면 나오게  */}
               </Marker>
 
               <Circle
@@ -153,11 +164,7 @@ const Map = () => {
                 <Marker
                   key={index}
                   position={farm.position}
-                  icon={
-                    selectedFarm && selectedFarm.name === farm.name
-                      ? mainIcon
-                      : locationIcon
-                  }
+                  icon={getMarkerIcon(farm)}
                   eventHandlers={{
                     click: () => handleMarkerClick(farm),
                   }}
@@ -181,7 +188,6 @@ const Map = () => {
             />
           </div>
         )}
-        {/* Display school info when selectedFarm is not present */}
         {school && !selectedFarm ? (
           <div className="flex flex-row items-center p-3">
             <img
@@ -195,7 +201,7 @@ const Map = () => {
               <div className="flex items-center"></div>
             </div>
           </div>
-        ) : selectedFarm ? ( // Show selected farm info
+        ) : selectedFarm ? (
           <div
             className="flex flex-row items-center p-3"
             onClick={() => handleFarmClick(selectedFarm)}
@@ -229,8 +235,7 @@ const Map = () => {
               </div>
             </div>
           </div>
-        ) : null}{" "}
-        {/* Ensure a null return if neither school nor farm is selected */}
+        ) : null}
       </div>
       {showToast && (
         <div className="toast toast-top toast-center w-4/5">
