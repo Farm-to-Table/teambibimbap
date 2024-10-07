@@ -38,6 +38,22 @@ import carrot4_1 from "../assets/product/vege/9.Green Thumb Gardens-carrot1.png"
 import sweetPotato1 from "../assets/product/vege/9.Green Thumb Gardens-sweet potato1.png";
 import sweetPotato1_2 from "../assets/product/vege/9.Green Thumb Gardens-sweet potato2.png";
 import carrot5_1 from "../assets/product/vege/10.Sunshine Acres-carrot1.png";
+import Beyond_proile from "../assets/farmImage/Beyond Organics-profile.jpg";
+import Beyond_main from "../assets/farmImage/Beyond Organics-main.jpg";
+import burger_lettuce from "../assets/product/salad/Beyond Organics-Burger lettuce.jpg";
+import garlic from "../assets/product/vege/Beyond Organics-Elephant garlic.jpg";
+import watercress from "../assets/product/salad/Beyond Organics-Watercress.jpg";
+import oakley_main from "../assets/farmImage/Oakley’s-main.png";
+import oakley_profile from "../assets/farmImage/Oakley’s-profile.png";
+import oakley_potato from "../assets/product/vege/Oakley’s-potato.png";
+import oakley_pumpkin from "../assets/product/vege/Oakley’s-pumpkin.png";
+import Apata_main from "../assets/farmImage/Apata-main.png";
+import Apata_profile from "../assets/farmImage/Apata-profile.png";
+import Apata_kiwi from "../assets/product/fruit/Apata-kiwi fruits.png";
+import Apata_avocado from "../assets/product/fruit/Apata-Avocado.png";
+import wilcox_main from "../assets/farmImage/Wilcox-profile.png";
+import wilcox_profile from "../assets/farmImage/Wilcox-profile.png";
+import wilcox_carrot from "../assets/product/vege/Wilcox-Carrot-Beta Bites.jpg";
 const farms = [
   {
     id: 1,
@@ -386,6 +402,190 @@ const farms = [
           "2kg": 6.0,
         },
         contact: "+64 9 876 5432",
+      },
+    ],
+  },
+  {
+    id: 11,
+    name: "Beyond Organics",
+    address:
+      "Hudson Bay Road Extension, Hobsonville, Auckland 0616 New Zealand",
+    position: [-36.78625899360846, 174.67008385965698],
+    introduction:
+      "We are Beyond Organics. A family business growing food as nature intended. Seed, sun, soil & water. Taste the difference.",
+    main_image: Beyond_main,
+    profile_image: Beyond_proile,
+    score: 5,
+    products: [
+      {
+        product_image1: burger_lettuce,
+        product_image2: "",
+        product: "lettuce",
+        varieties: {
+          Burgerlettuce:
+            "Organic Burger Lettuce is a premium variety of lettuce grown using sustainable, pesticide-free methods. Known for its crisp texture and slightly sweet flavor, this lettuce is ideal for creating the perfect burger or sandwich topping. Each leaf provides a sturdy base while maintaining tenderness, ensuring your burger stays fresh and delicious without becoming soggy. Rich in vitamins A and C, as well as dietary fiber, Organic Burger Lettuce not only enhances the taste of your meals but also contributes to a healthier diet. Its vibrant green leaves are harvested at peak freshness, delivering high quality and taste directly from farm to table.",
+        },
+        weight: [500, 1000, 2000],
+        quality: "",
+        price: {
+          "150g": 5.0,
+        },
+        contact: "+64 9 876 5432",
+      },
+
+      {
+        product_image1: watercress,
+        product_image2: "",
+        product: "Watercress",
+        varieties: {
+          Watercress:
+            "Watercress is an ancient green. It is a member of the cruciferous family, alongsidekale, broccoli, arugula, and Brussels sprouts.",
+        },
+        weight: [500, 1000, 2000],
+        quality:
+          "One bunch of watercress grown in Masterton in water without any sprays.",
+        price: {
+          bunch: 3.2,
+        },
+        contact: "Instagram. @beyondorganicsnz",
+      },
+      {
+        product_image1: garlic,
+        product_image2: "",
+        product: "garlic",
+        varieties: {
+          Elephant_garlic:
+            "Organic Elephant Garlic is a unique and mild-flavored garlic variety, known for its large bulb size and delicate taste. Despite its name, it is more closely related to leeks than to traditional garlic, giving it a subtler, less pungent flavor. Elephant garlic bulbs can grow up to five times the size of regular garlic, making them perfect for roasting, grilling, or adding a gentle garlic essence to dishes without overpowering them. Rich in vitamins B6, C, and minerals like manganese and selenium, organic elephant garlic is not only a flavorful addition to meals but also a nutritious one. Grown without the use of chemical fertilizers or pesticides, it offers a cleaner, healthier option for conscious consumers.",
+        },
+        weight: [500, 1000, 2000],
+        quality:
+          "Organic Burger Lettuce is a premium variety of lettuce grown using sustainable, pesticide-free methods. Known for its crisp texture and slightly sweet flavor, this lettuce is ideal for creating the perfect burger or sandwich topping. Each leaf provides a sturdy base while maintaining tenderness, ensuring your burger stays fresh and delicious without becoming soggy. Rich in vitamins A and C, as well as dietary fiber, Organic Burger Lettuce not only enhances the taste of your meals but also contributes to a healthier diet. Its vibrant green leaves are harvested at peak freshness, delivering high quality and taste directly from farm to table.",
+        price: {
+          "180g": 10.99,
+        },
+        contact: "+64 9 876 5432",
+      },
+    ],
+  },
+
+  {
+    id: 12,
+    name: "Oakley’s",
+    address: "422 Cryers Road, Southbridge 7683",
+    position: [-43.84697547367785, 172.22348399999998],
+    introduction:
+      "There are five generations of growers in the Oakley family! We believe what we grow is the best fuel for people and supports their wellbeing. We inform customers how their vegetables are grown with packaging to reflect the quality product inside. Our premium products respect the land and bring families together. ",
+    main_image: oakley_main,
+    profile_image: oakley_profile,
+    score: 5,
+    products: [
+      {
+        product_image1: oakley_potato,
+        product_image2: "",
+        product: "potato",
+        varieties: {
+          Potato_Baby_Golden_Gourmets:
+            "Tasty & innovative: our most popular spud yet. The Baby Golden Gourmet is perfect for the modern family who want a high quality, versatile and delicious potato. These buttery spuds are bursting with goodness from the fertile soils of Canterbury. These superstars are a multipurpose potato, so go ahead! Bake them, boil them, mash them or even throw them in a salad – The Baby Golden Gourmets have got you covered.",
+        },
+        weight: [1500],
+        quality:
+          "Naturally gluten-free, these spuds are a nutritional goldmine, bursting with vitamins and minerals. Vitamin C strengthens your immune system and folate boosts energy. Packed with fibre, these spuds will improve your digestive health. Niacin and potassium provide the perfect nutrition for growing kids.",
+        price: {
+          "1.5kg": 2.99,
+        },
+        contact: "Phone: 64 3 3242902 Email: office@oakleys.co.nz",
+      },
+
+      {
+        product_image1: oakley_pumpkin,
+        product_image2: "",
+        product: "pumkin",
+        varieties: {
+          Pumpkin: "",
+        },
+        weight: ["UNDEFINED"],
+        quality:
+          "Naturally gluten-free, these spuds are a nutritional goldmine, bursting with vitamins and minerals. Vitamin C strengthens your immune system and folate boosts energy. Packed with fibre, these spuds will improve your digestive health. Niacin and potassium provide the perfect nutrition for growing kids.",
+
+        price: {
+          "1ea": 4.99,
+        },
+        contact: "+64 3 3242902, office@oakleys.co.nz",
+      },
+    ],
+  },
+  {
+    id: 13,
+    name: "Apata",
+    address: "15 Mends Lane, RD6, Te Puke 3186",
+    position: [-37.80548149757007, 176.43758055767125],
+    introduction:
+      "At the core of Apata’s business is the harvest and processing of kiwifruit from strategically located Te Puke and Katikati packhouses and cool-storage facilities. Alongside our kiwifruit operations, we’re also the country’s largest and most respected avocado harvester and processor.",
+    main_image: Apata_main,
+    profile_image: Apata_profile,
+    score: 5,
+    products: [
+      {
+        product_image1: Apata_kiwi,
+        product_image2: "",
+        product: "kiwifruit",
+        varieties: {
+          Kiwi_fruits:
+            "As the compliance regime in place for conventional kiwifruit production has continually evolved, Apata’s vigilance has ensured we continue to generate and maintain premiums for organic kiwifruit. We have specific Organic harvest and packing protocols, with dedicated, certified Organic post-harvest facilities.",
+        },
+        weight: [1000],
+        quality:
+          "This enables us to work alongside our Organic growers to produce a crop grown and packed in a format that will enable maximum exposure to the higher paying global market segments.",
+        price: {
+          "1.0kg": 3.99,
+        },
+        contact: "+64 7 533 6212",
+      },
+
+      {
+        product_image1: Apata_avocado,
+        product_image2: "",
+        product: "avocado",
+        varieties: {
+          Avocado:
+            "For avocado crops, our fruit washing and phytosanitary regimes are second to none and, when coupled with our hi-tech grading and packing equipment, give us the capability to run the most comprehensive harvest and packing programme in the industry.",
+        },
+        weight: ["1000"],
+        quality:
+          "This is a significant factor in managing the optimal flow of fruit and quality through to our important domestic and international retail markets.",
+        price: {
+          "1.0kg": 1.99,
+        },
+        contact: "+64 7 533 6212",
+      },
+    ],
+  },
+  {
+    id: 14,
+    name: "Wilcox",
+    address: "58 Union Road, Pukekohe 2678 New Zealand",
+    position: [-37.212910052601664, 174.8506962194306],
+    introduction:
+      "A. S. Wilcox and Sons Ltd was established in 1954 and has continued to grow and market potatoes, onions and carrots ever since, becoming an integral part of New Zealand’s agricultural industry.",
+    main_image: wilcox_main,
+    profile_image: wilcox_profile,
+    score: 5,
+    products: [
+      {
+        product_image1: wilcox_carrot,
+        product_image2: "",
+        product: "carrot",
+        varieties: {
+          Carrot_Beta_Bites:
+            "Beta Bites have been specially grown as perfectly sized, deliciously sweet, snackable carrots, ready to crunch on any time.",
+        },
+        weight: [250],
+        quality:
+          "they’re a guilt free treat, packed with Beta-Carotene, which your body converts to vitamin A to support healthy skin, eyes and growth development",
+        price: {
+          "250g": 2.5,
+        },
+        contact: "+64 9 237 0740, customers@aswilcox.co.nz ",
       },
     ],
   },

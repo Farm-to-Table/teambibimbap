@@ -65,9 +65,7 @@ const FarmDetailPage = () => {
                     </li>
                   ))}
                 </ul>
-                <div className="text-gray-700">
-                  <span className="font-semibold">Size:</span> {prod.size}
-                </div>
+
                 <div className="text-gray-700">
                   <span className="font-semibold">Weight:</span>{" "}
                   {prod.weight.join(", ")}

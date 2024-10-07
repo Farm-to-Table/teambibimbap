@@ -19,6 +19,14 @@ import carrot4_1 from "../product/vege/9.Green Thumb Gardens-carrot1.png";
 import sweetPotato1 from "../product/vege/9.Green Thumb Gardens-sweet potato1.png";
 import sweetPotato1_2 from "../product/vege/9.Green Thumb Gardens-sweet potato2.png";
 import carrot5_1 from "../product/vege/10.Sunshine Acres-carrot1.png";
+import burger_lettuce from "../product/salad/Beyond Organics-Burger lettuce.jpg";
+import garlic from "../product/vege/Beyond Organics-Elephant garlic.jpg";
+import watercress from "../product/salad/Beyond Organics-Watercress.jpg";
+import oakley_potato from "../product/vege/Oakley’s-potato.png";
+import oakley_pumpkin from "../product/vege/Oakley’s-pumpkin.png";
+import Apata_kiwi from "../product/fruit/Apata-kiwi fruits.png";
+import Apata_avocado from "../product/fruit/Apata-Avocado.png";
+import wilcox_carrot from "../product/vege/Wilcox-Carrot-Beta Bites.jpg";
 const product = [
   {
     id: 1,
@@ -254,6 +262,151 @@ const product = [
       "500g": 2,
       "1kg": 3,
       "2kg": 6,
+    },
+  },
+
+  {
+    id: 11,
+    category: "salad",
+    name: "Burger Lettuce",
+    farm: "Beyond Organics",
+    image1: burger_lettuce,
+    image2: "",
+    image3: "",
+    description:
+      "Organic Burger Lettuce is a premium variety of lettuce grown using sustainable, pesticide-free methods.",
+    organic: true,
+    onStock: true,
+    wonkey: false,
+    score: 5,
+    price: {
+      "150g": 5,
+    },
+  },
+  {
+    id: 11,
+    category: "vege",
+    name: "Elephant garlic ",
+    farm: "Beyond Organics",
+    image1: garlic,
+    image2: "",
+    image3: "",
+    description:
+      "Organic Elephant Garlic is a unique and mild-flavored garlic variety, known for its large bulb size and delicate taste. ",
+    organic: true,
+    onStock: true,
+    wonkey: false,
+    score: 4,
+    price: {
+      "180g": 10.99,
+    },
+  },
+  {
+    id: 11,
+    category: "salad",
+    name: "Watercress",
+    farm: "Beyond Organics",
+    image1: watercress,
+    image2: "",
+    image3: "",
+    description:
+      "One bunch of watercress grown in Masterton in water without any sprays.",
+    organic: true,
+    onStock: true,
+    wonkey: false,
+    score: 4,
+    price: {
+      "1 bunch": 10.99,
+    },
+  },
+  {
+    id: 12,
+    category: "vege",
+    name: "Potato-Baby Golden Gourmets",
+    farm: "Oakley’s",
+    image1: oakley_potato,
+    image2: "",
+    image3: "",
+    description:
+      "Tasty & innovative: our most popular spud yet. The Baby Golden Gourmet is perfect for the modern family who want a high quality, versatile and delicious potato",
+    organic: false,
+    onStock: true,
+    wonkey: true,
+    score: 5,
+    price: {
+      "1.5kg": 2.99,
+    },
+  },
+  {
+    id: 12,
+    category: "vege",
+    name: "Pumpkin",
+    farm: "Oakley’s",
+    image1: oakley_pumpkin,
+    image2: "",
+    image3: "",
+    description:
+      "Naturally gluten-free, these spuds are a nutritional goldmine, bursting with vitamins and minerals. Vitamin C strengthens your immune system and folate boosts energy. ",
+    organic: false,
+    onStock: true,
+    wonkey: true,
+    score: 4,
+    price: {
+      "1 EA": 4.99,
+    },
+  },
+  {
+    id: 13,
+    category: "fruit",
+    name: "Kiwi fruits",
+    farm: "Apata",
+    image1: Apata_kiwi,
+    image2: "",
+    image3: "",
+    description:
+      "As the compliance regime in place for conventional kiwifruit production has continually evolved, Apata’s vigilance has ensured we continue to generate and maintain premiums for organic kiwifruit.",
+    organic: true,
+    onStock: true,
+    wonkey: true,
+    score: 5,
+    price: {
+      "1kg": 3.99,
+    },
+  },
+  {
+    id: 13,
+    category: "fruit",
+    name: "Avocado",
+    farm: "Apata",
+    image1: Apata_avocado,
+    image2: "",
+    image3: "",
+    description:
+      "For avocado crops, our fruit washing and phytosanitary regimes are second to none and, when coupled with our hi-tech grading and packing equipment, give us the capability to run the most comprehensive harvest and packing programme in the industry.",
+    organic: false,
+    onStock: true,
+    wonkey: true,
+    score: 4,
+    price: {
+      "1kg": 1.99,
+    },
+  },
+  {
+    id: 14,
+    category: "vege",
+    name: "Carrot-Beta Bites",
+    farm: "Wilcox ",
+    image1: wilcox_carrot,
+    image2: "",
+    image3: "",
+    description:
+      "Beta Bites have been specially grown as perfectly sized, deliciously sweet, snackable carrots, ready to crunch on any time.",
+    organic: false,
+    onStock: true,
+    wonkey: true,
+    score: 5,
+    price: {
+      "250g": 2.5,
     },
   },
 ];

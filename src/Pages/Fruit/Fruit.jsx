@@ -1,36 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import product from "../../assets/product/product";
 
 const Fruit = () => {
-  // State for managing the organic and wonkey filters and sorting option
-  const [isOrganicOnly, setIsOrganicOnly] = useState(false); // Filter for organic products
-  const [isWonkeyOnly, setIsWonkeyOnly] = useState(false); // Filter for wonkey products
-  const [sortOption, setSortOption] = useState(""); // Sorting option
-  const [isScoreHighToLow, setIsScoreHighToLow] = useState(true); // State to toggle score sorting
+  const [isOrganicOnly, setIsOrganicOnly] = useState(false);
+  const [isWonkeyOnly, setIsWonkeyOnly] = useState(false);
+  const [sortOption, setSortOption] = useState("");
+  const [isScoreHighToLow, setIsScoreHighToLow] = useState(true);
+  const [sortedFruit, setSortedFruit] = useState([]);
 
-  // Handle filtering for organic and wonkey products
-  const filteredFruit = product.filter((product) => {
-    // Filter by organic and wonkey conditions
-    const organicCondition = isOrganicOnly ? product.organic : true;
-    const wonkeyCondition = isWonkeyOnly ? product.wonkey : true;
-    const categoryCondition = product.category === "fruit"; // Add category filter
+  useEffect(() => {
+    const filteredFruit = product.filter((product) => {
+      const organicCondition = isOrganicOnly ? product.organic : true;
+      const wonkeyCondition = isWonkeyOnly ? product.wonkey : true;
+      const categoryCondition = product.category === "fruit";
+      return organicCondition && wonkeyCondition && categoryCondition;
+    });
 
-    return organicCondition && wonkeyCondition && categoryCondition; // Return the combined condition
-  });
+    const sorted = [...filteredFruit].sort((a, b) => {
+      if (sortOption === "score") {
+        return isScoreHighToLow ? b.score - a.score : a.score - b.score;
+      }
+      return 0;
+    });
 
-  // Handle sorting by name or score
-  const sortedFruit = [...filteredFruit].sort((a, b) => {
-    if (sortOption === "name") {
-      return a.name.localeCompare(b.name); // Sort alphabetically by name
-    }
-    if (sortOption === "score") {
-      return isScoreHighToLow ? b.score - a.score : a.score - b.score; // Sort by score (high to low or low to high)
-    }
-    return 0; // Default: no sorting
-  });
+    setSortedFruit(sorted);
+  }, [isOrganicOnly, isWonkeyOnly, sortOption, isScoreHighToLow]);
 
-  // Toggle score sorting
   const toggleScoreSort = () => {
     setSortOption("score");
     setIsScoreHighToLow(!isScoreHighToLow);
@@ -38,7 +34,6 @@ const Fruit = () => {
 
   return (
     <div>
-      {/* Filter section */}
       <div className="px-2 flex flex-row justify-end gap-3 items-center border-b-2">
         <div className="form-control flex flex-row">
           <label className="cursor-pointer label gap-2">
@@ -46,7 +41,7 @@ const Fruit = () => {
               type="checkbox"
               checked={isOrganicOnly}
               className="checkbox checkbox-success"
-              onChange={() => setIsOrganicOnly(!isOrganicOnly)} // Toggle organic filter
+              onChange={() => setIsOrganicOnly(!isOrganicOnly)}
             />
             <span className="label-text">Organic</span>
           </label>
@@ -55,21 +50,19 @@ const Fruit = () => {
               type="checkbox"
               checked={isWonkeyOnly}
               className="checkbox checkbox-warning"
-              onChange={() => setIsWonkeyOnly(!isWonkeyOnly)} // Toggle wonkey filter
+              onChange={() => setIsWonkeyOnly(!isWonkeyOnly)}
             />
             <span className="label-text">Wonkey</span>
           </label>
         </div>
 
-        {/* Sorting options */}
         <div className="text-sm flex flex-row gap-2">
           <button className="btn btn-xs btn-outline" onClick={toggleScoreSort}>
-            Score {isScoreHighToLow ? "↑" : "↓"}
+            Score {isScoreHighToLow ? "↓" : "↑"}
           </button>
         </div>
       </div>
 
-      {/* Product listing */}
       <div>
         {sortedFruit.map((product, index) => (
           <Link to={`/teambibimbap/product/${product.farm}`} key={index}>
@@ -94,16 +87,15 @@ const Fruit = () => {
                 <div className="flex flex-row justify-between items-center">
                   <p className="font-bold">{product.name}</p>
                   <div className="rating flex items-center">
-                    {/* Render stars based on product score */}
                     {[...Array(5)].map((_, i) => (
                       <input
                         key={i}
                         type="radio"
                         name={`rating-${product.id}`}
                         className={`mask mask-star-2 bg-orange-400 w-2 ${
-                          i < product.score ? "checked" : ""
+                          i < Math.round(product.score) ? "checked" : ""
                         }`}
-                        defaultChecked={i < product.score} // Activate star based on score
+                        checked={i < Math.round(product.score)}
                         readOnly
                       />
                     ))}
@@ -111,6 +103,9 @@ const Fruit = () => {
                 </div>
                 <p>{product.farm}</p>
                 <p className="text-xs">{product.description}</p>
+                <p className="text-sm font-semibold">
+                  Score: {product.score.toFixed(1)}
+                </p>
               </div>
             </div>
           </Link>
