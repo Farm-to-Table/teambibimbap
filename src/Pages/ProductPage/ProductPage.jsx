@@ -147,10 +147,10 @@ const ProductPage = () => {
               </div>
 
               {/* Flex row for weight and quantity selection */}
-              <div className="flex justify-between mt-2">
+              <div className="flex justify-between mt-2 bg-white">
                 <select
                   onChange={(e) => setSelectedWeight(e.target.value)}
-                  className="select select-bordered w-1/2 mr-2 outline-none focus:ring-0"
+                  className="select select-bordered w-1/2 mr-2 outline-none focus:ring-0 bg-white"
                 >
                   <option value="">Select Weight</option>
                   {Object.keys(product.price).map((weight) => (
@@ -161,14 +161,14 @@ const ProductPage = () => {
                 </select>
 
                 {/* Quantity selection */}
-                <div className="flex items-center w-1/2">
+                <div className="flex items-center w-1/2 bg-white">
                   <label className="mr-2 text-lg">Quantity:</label>
                   <input
                     type="number"
                     min="1"
                     value={quantity}
                     onChange={(e) => setQuantity(Number(e.target.value))}
-                    className="border border-gray-300 rounded-md w-16 p-1 text-center"
+                    className="border border-gray-300 rounded-md w-16 p-1 text-center bg-white"
                   />
                 </div>
               </div>

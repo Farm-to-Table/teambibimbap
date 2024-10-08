@@ -98,7 +98,7 @@ const Cart = () => {
     <div className="p-4 h-full">
       <h2 className="text-2xl font-bold mb-4">Your Cart</h2>
       {cart.length > 0 ? (
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card  shadow-xl bg-white">
           <div className="card-body">
             {cart.map((item, index) => (
               <div

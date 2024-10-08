@@ -128,7 +128,7 @@ const Home = () => {
         </div>
 
         <div>
-          <div className="flex flex-row w-full  bg-base-200 p-3 items-center justify-center gap-3 bg-white">
+          <div className="flex flex-row w-full  bg-gray-400 p-3 items-center justify-center gap-3 ">
             <img
               src={recommedation}
               alt="test"
