@@ -110,8 +110,8 @@ const Navbar = () => {
           <img src={logo} alt="logo" width="100rem" className="mr-4" />
         </div>
       </Link>
-      <div className="w-full md:w-1/2 mb-4 md:mb-0 relative">
-        <label className="input flex items-center gap-2 w-full border-0 focus-within:outline-none focus-within:ring-0">
+      <div className="w-full md:w-1/2 mb-4 md:mb-0 relative bg-white">
+        <label className="input flex items-center gap-2 w-full border-0 focus-within:outline-none focus-within:ring-0 bg-white">
           <input
             type="text"
             className="grow border-0 outline-none focus:ring-0 bg-white"
