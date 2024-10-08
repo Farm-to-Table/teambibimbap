@@ -114,7 +114,7 @@ const Navbar = () => {
         <label className="input flex items-center gap-2 w-full border-0 focus-within:outline-none focus-within:ring-0">
           <input
             type="text"
-            className="grow border-0 outline-none focus:ring-0"
+            className="grow border-0 outline-none focus:ring-0 bg-white"
             placeholder="Search"
             onChange={handleOnChange}
             value={search}
@@ -141,7 +141,6 @@ const Navbar = () => {
                     className="flex items-center cursor-pointer hover:bg-base-300 p-2 transition-colors duration-200"
                     onClick={() => handleProductClick(item.farmId)}
                   >
-                  
                     <img
                       src={item.product_image1}
                       alt={item.product}
@@ -180,13 +179,15 @@ const Navbar = () => {
 
           <ul
             tabIndex={0}
-            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-64 p-2 shadow"
+            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-64 p-2 shadow "
           >
             {orders ? (
               <li>
-                <div className="p-2 flex flex-col">
+                <div className="p-2 flex flex-col bg-white">
                   <div className="text-start w-full">
-                    <h3 className="font-bold">Fresh box is delivering now! 🚚</h3>
+                    <h3 className="font-bold">
+                      Fresh box is delivering now! 🚚
+                    </h3>
                   </div>
                   <div className="w-full text-start flex-row flex ">
                     <p>Date: {orders.date}</p>

@@ -177,7 +177,7 @@ const Home = () => {
                     product.selectedWeight || Object.keys(product.price)[0]
                   } // 기본값으로 첫 번째 무게 선택
                   onChange={(e) => handleWeightChange(index, e)}
-                  className="font-creterount select mb-2 w-24 border-none outline-none text-sm p-1 focus:ring-0 focus:outline-none"
+                  className="font-creterount select mb-2 w-24 border-none outline-none text-sm p-1 focus:ring-0 focus:outline-none bg-white"
                   style={{
                     boxShadow: "none",
                     border: "none",
@@ -188,7 +188,7 @@ const Home = () => {
                     <option
                       key={weight}
                       value={weight}
-                      className="border-none outline-none"
+                      className="border-none outline-none bg-white"
                       style={{ border: "none", outline: "none" }}
                     >
                       {weight}
